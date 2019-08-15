@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minimal PWA</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <style media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .parent {
+            position: relative;
+            height: 100%;
+        }
+
+        .child {
+            width: 80px;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="child">
+
+        </div>
+    </div>
+    <script type="text/javascript">
+
+
+        const fetchJSON = _ => {
+            return fetch('https://www.easy-mock.com/mock/5a8e3695b9b9b15c62da8051/leran/learn').then(res => {
+                return res.json();
+            });
+        }
+        fetchJSON().then(res => {
+            console.log(res);
+        })
+    </script>
+</body>
+
+</html>

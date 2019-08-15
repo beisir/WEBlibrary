@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=dev-width">
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+<style media="screen">
+
+@font-face {
+  font-family: 'Monoton';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Monoton'), local('Monoton-Regular'), url(https://fonts.gstatic.com/s/monoton/v6/y6oxFxU60dYw9khW6q8jGw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+.box{
+  width: 100px;
+  height: 100px;
+  /*background: red;*/
+  text-transform: uppercase;
+  animation: transi 1s forwards;
+  /*filter: drop-shadow(5px 5px 10px #000);
+  filter: blur(0.5);*/
+ }
+@keyframes transi{
+  0% {
+    -webkit-transform: perspective(400px) rotateY(90deg);
+    transform: perspective(400px) rotateY(90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    -webkit-transform: perspective(400px) rotateY(-20deg);
+    transform: perspective(400px) rotateY(-20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: perspective(400px) rotateY(10deg);
+    transform: perspective(400px) rotateY(10deg);
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: perspective(400px) rotateY(-5deg);
+    transform: perspective(400px) rotateY(-5deg);
+  }
+  100% {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+/*.div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: -10vw;
+}
+p {
+    font-family: 'Monoton', cursive;
+    width: 9vw;
+    cursor: pointer;
+    font-size: 50px;
+    text-shadow: 0.5vw 0.5vw 0 black;
+}*/
+
+
+
+.hvr_curl_top_left:before{
+    pointer-events: none;
+    position: absolute;
+    content: '';
+    height: 0;
+    width: 0;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    background: linear-gradient(135deg, #ffffff 45%, #aaaaaa 50%, #cccccc 56%, #ffffff 80%);
+    z-index: 1000;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    transition-duration: 0.3s;
+    transition-property: width,height;
+}
+.hvr_curl_top_left:hover:before{
+    width: 25px;
+    height: 25px;
+}
+.hvr_border_underline_from_center{
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    position: relative;
+}
+.hvr_border_underline_from_center:before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: 50%;
+    bottom: 0;
+    left: 50%;
+    background: #0275d8;
+    height: 4px;
+    transition-property: left, right;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
+    /*left: 10px;
+    right: 10px;*/
+}
+.hvr_border_underline_from_center:active:before{
+    left: 0;
+    right: 0;
+}
+</style>
+</head>
+<body>
+
+
+<!-- <div class="div">
+	<p class="letter-b letter-hover">1</p>
+	<p class="letter-l letter-hover">7</p>
+	<p class="letter-u letter-hover">s</p>
+	<p class="letter-r letter-hover">u</p>
+	<p class="letter-r letter-hover">c</p>
+	<p class="letter-r letter-hover">a</p>
+	<p class="letter-r letter-hover">i</p>
+</div> -->
+
+
+<!-- <div class="box">
+  <img src="http://res1.eqh5.com/o_1bp1k71d41kg2gm46bo1vr73sj2v.png?imageMogr2/auto-orient/thumbnail/299x270%3E" alt="">
+</div> -->
+
+
+
+<a href="#" class="hvr_curl_top_left">asadasdsa</a>
+<div class="hvr_border_underline_from_center">
+  下划线
+</div>
+</body>
+</html>

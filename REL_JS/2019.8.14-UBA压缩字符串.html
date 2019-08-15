@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="gb2312">
+    <title></title>
+    <style>
+        .show{
+            display: block;
+        }
+
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<textarea name="name" rows="8" cols="80" id="area">"{"href":"http://10.158.33.72:8000/UNUBA.html","ancestorOrigins":{},"origin":"http://10.158.33.72:8000","protocol":"http:","host":"10.158.33.72:8000","hostname":"10.158.33.72","port":"8000","pathname":"/UNUBA.html","search":"","hash":""}"</textarea>
+<button type="button" name="button" id="clickbtn2">压缩代码</button>
+
+<h1 style="padding-left: 280px; box-sizing: border-box;">↑↓</h1>
+
+<textarea name="name" rows="8" cols="80" id="text"></textarea>
+<button type="button" name="button" id="clickbtn">解压代码</button>
+
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/lz-string/1.4.4/lz-string.js"></script>
+
+<script type="text/javascript">
+
+document.querySelector('#clickbtn2').addEventListener('click', function () {
+    var text = document.querySelector('#text'),
+        area = document.querySelector('#area');
+    try {
+        text.value = '';
+        text.value = LZString.compressToEncodedURIComponent(area.value.trim());
+    } catch (e) {
+        alert('代码格式不正确');
+    };
+
+})
+
+
+
+document.querySelector('#clickbtn').addEventListener('click', function () {
+    var text = document.querySelector('#text'),
+        area = document.querySelector('#area');
+    try {
+        area.value = '';
+        area.value = LZString.decompressFromEncodedURIComponent(text.value.trim());
+    } catch (e) {
+        alert('代码格式不正确');
+    };
+
+})
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

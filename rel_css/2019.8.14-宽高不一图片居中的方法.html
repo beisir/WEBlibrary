@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        ol, ul {list-style: none;}
+        html, body {width: 100%;height: 100%;}
+        body {width: 100%; height: 100%;background: #eee; position: absolute;}
+        .container {width: 732px; background-color: #fff;  margin:50px auto; background: white; overflow: hidden;}
+        .img-list {padding: 20px; box-sizing: border-box;overflow: hidden;} 
+        .img-list li{width: 150px; height: 150px;border: solid #ccc 1px; margin: 20px 0 0 18px;float: left;}
+        
+        
+        .img-list li span.one {display: table-cell; height: 150px; width: 150px; vertical-align: middle; text-align: center;}
+        .img-list li span.one img{display: inline; max-width: 150px; max-height: 150px;vertical-align: middle;}
+
+        
+        .img-list li span.two {display: block; height: 100%; width: 100%; position: relative;}
+        .img-list li span.two img {position: absolute; top: 0; right: 0;left: 0; bottom: 0; max-width: 100%; max-height: 100%; margin: auto;}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul class="img-list">
+        <li>
+            <span class="one">
+                <img src="https://img007.hc360.cn/k1/M02/88/F1/i522a60ceb70dcdfe8097ab431a2e89a5df.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="one">
+                <img src="https://img010.hc360.cn/k1/M0D/73/36/aNe04258C7B63963E0D1E598FC0269A9149.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="one">
+                <img src="https://img009.hc360.cn/k1/M0C/88/F1/8sMbbeC851DF19FeF596ebCC64970A25C6C.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="one">
+                <img src="https://img002.hc360.cn/k1/M0D/73/36/gXx954952fba2eC78827fe40732a0715fCC.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="two">
+                <img src="https://img007.hc360.cn/k1/M02/88/F1/i522a60ceb70dcdfe8097ab431a2e89a5df.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="two">
+                <img src="https://img010.hc360.cn/k1/M0D/73/36/aNe04258C7B63963E0D1E598FC0269A9149.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="two">
+                <img src="https://img009.hc360.cn/k1/M0C/88/F1/8sMbbeC851DF19FeF596ebCC64970A25C6C.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+        <li>
+            <span class="two">
+                <img src="https://img002.hc360.cn/k1/M0D/73/36/gXx954952fba2eC78827fe40732a0715fCC.jpg..180x180.jpg" alt="">
+            </span>
+        </li>
+    </ul>
+
+</div>
+</body>
+</html>

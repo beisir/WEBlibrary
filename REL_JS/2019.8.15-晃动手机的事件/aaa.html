@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=dev-width">
+<style media="screen">
+*{
+  padding:0;
+  margin:0;
+}
+body{
+  background: #000;
+}
+.box{
+  width:50px;
+  height: 50px;
+  background: red;
+  position: absolute;
+  top: 45%;
+  left:45%;
+  margin-left: -25px;
+  margin-top: -25px;
+  transition: transform .6s ;
+  color:white;
+}
+</style>
+  </head>
+  <body>
+<div class="box" id="arrow">aaa</div>
+<div class="" id="box">
+
+</div>
+<script type="text/javascript">
+try {
+    var text = "";
+    window.addEventListener("deviceorientation", orientationHandler, false);
+    function orientationHandler(event) {
+        var arrow = document.getElementById("arrow");
+        var alpha = Math.round(event.alpha);// z轴
+        var beta = Math.round(event.beta); // x轴
+        var gamma = Math.round(event.gamma); //y轴
+        // text += "左右旋转：rotate alpha{" + Math.round(event.alpha) + "deg)<p>";
+        // text += "前后旋转：rotate beta{" + Math.round(event.beta) + "deg)<p>";
+        // text += "扭转设备：rotate gamma{" + Math.round(event.gamma) + "deg)<p>";
+        // arrow.innerHTML = text;
+        arrow.style.cssText = `transform:translate3d(${beta}px,${gamma}px,${alpha}px)`; //rotate3d(0,0,1,${alpha}deg)
+        // arrow.style.cssText = `rotate3d(1,1,1,${-alpha}deg)`;
+
+        // element.style.transform = "rotate(-1deg)";
+    }
+}
+catch (e) {
+    document.getElementById("arrow").innerHTML = e.message;
+}
+</script>
+  </body>
+</html>

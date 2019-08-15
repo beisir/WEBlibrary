@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+  <button type="button" name="button" id="btn">分享</button>
+<button type="button" name="button" id="btn2">分享2</button>
+<script type="text/javascript">
+function shareToXl(title,url,picurl){
+  var sharesinastring='http://v.t.sina.com.cn/share/share.php?title='+title+'&url='+url+'&content=utf-8&sourceUrl='+url+'&pic='+picurl;
+  window.open(sharesinastring,'newwindow');
+}
+
+
+//分享到qq空间
+function shareToQq(title,url,picurl){
+  var shareqqzonestring='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary=这是本公司的移动名片，欢迎合作洽谈！  http://b2b.hc360.com/h5/liyeqing3915-2.html'+'&url='+url+'&pics='+picurl +'&title='+title;
+  window.open(shareqqzonestring);
+}
+function subinfo(){
+  shareToQq("这是本公司的移动名片，欢迎合作洽谈！","http://b2b.hc360.com/h5/liyeqing3915-1.html","http://style.org.hc360.com/images/my/images/corcenter/mmt4/new/wjz/wj_41.jpg");
+}
+
+function rr(_title,_url,_pic){
+  var _shareUrl = 'https://www.douban.com/share/service?';
+    _shareUrl += 'href=' + encodeURIComponent(_url||location.href);    //分享的链接
+    _shareUrl += '&name=' + encodeURIComponent(_title||document.title);    //分享的标题
+    _shareUrl += '&image=' + encodeURIComponent(_pic||'');    //分享的图片
+    _shareUrl += '&text=' + '这是本公司的移动名片，欢迎合作洽谈！ http://b2b.hc360.com/h5/liyeqing3915-1.html';
+    // window.open(_shareUrl,'_blank','width='+_width+',height='+_height+',left='+(screen.width-_width)/2+',top='+(screen.height-_height)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
+    window.open(_shareUrl);
+}
+
+//https://www.douban.com/share/service?href=http%3A%2F%2Fb2b.hc360.com%2Fh5%2Fliyeqing3915-1.html&name=这是本公司的移动名片，欢迎合作洽谈！&text=这是本公司的移动名片，欢迎合作洽谈！%20%20http%3A%2F%2Fb2b.hc360.com%2Fh5%2Fliyeqing3915-1.html&image=http%3A%2F%2Fstyle.org.hc360.com%2Fimages%2Fmy%2Fimages%2Fcorcenter%2Fmmt4%2Fnew%2Fwjz%2Fwj_41.jpg&starid=0&aid=0&style=11
+btn.onclick = function(){
+  subinfo()
+}
+btn2.onclick = function(){
+  // shareToXl("这是本公司的移动名片，欢迎合作洽谈！","http://b2b.hc360.com/h5/liyeqing3915-1.html","http://style.org.hc360.com/images/my/images/corcenter/mmt4/new/wjz/wj_41.jpg")
+  rr("这是本公司的移动名片，欢迎合作洽谈！","http://b2b.hc360.com/h5/liyeqing3915-1.html","http://style.org.hc360.com/images/my/images/corcenter/mmt4/new/wjz/wj_41.jpg")
+
+}
+</script>
+</body>
+</html>

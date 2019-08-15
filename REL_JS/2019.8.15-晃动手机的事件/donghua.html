@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+<style media="screen">
+  .content{
+    width: 120px;
+    line-height: 30px;
+    text-align: center;
+    border: solid #000 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+  }
+  .content:before{
+    content: "";
+    position: absolute;
+    z-index: -100;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: rotate(360deg) scaleX(0) skew(10deg,5deg);;
+    background: red;
+    transition-property: transform;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
+    transform-origin: center;
+  }
+  .content:hover:before{
+    transform: rotate(0deg) scaleX(1) skew(0deg,0deg);
+  }
+</style>
+</head>
+<body>
+<div class="content">鼠标滑过效果·</div>
+
+</body>
+</html>
