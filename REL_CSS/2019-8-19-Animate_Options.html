@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>企业号</title>
+<meta Name="description" Content="慧聪,企业号,采购,交易">
+<meta Name="keywords" Content="慧聪,企业号,采购,交易">
+
+<script src="https://style.org.hc360.com/js/build/source/core/jquery.min.js"></script>
+</style>
+
+</head>
+
+<body>
+<div class="boxCon3">
+	<div class="wrap">
+    	<div class="comNom">已有<span id="count">12548</span>个企业成功申请了企业号服务</div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+(function($){
+    $.fn.numberRock=function(options){
+        var defaults={
+            // lastNumber:100,
+            // duration:2000,
+            // easing:'swing'  //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
+        };
+        var opts=$.extend({}, defaults, options);
+
+
+        // $(selector).animate(styles,speed,easing,callback)
+
+        // $(selector).animate(styles,options)
+        // 参数	描述
+        // styles	必需。规定产生动画效果的 CSS 样式和值（同上）。
+        // options	
+        // 可选。规定动画的额外选项。
+
+        // 可能的值：
+
+        // speed - 设置动画的速度
+        // easing - 规定要使用的 easing 函数 swing  linear
+        // callback - 规定动画完成之后要执行的函数
+        // step - 规定动画的每一步完成之后要执行的函数
+        // queue - 布尔值。指示是否在效果队列中放置动画。如果为 false，则动画将立即开始
+        // specialEasing - 来自 styles 参数的一个或多个 CSS 属性的映射，以及它们的对应 easing 函数
+
+
+        $(this).animate({
+            num : "numberRock",
+            // width : 300,
+            // height : 300,
+        },{
+            duration : opts.duration,
+            easing : opts.easing,
+            complete : function(){
+                console.log("success");
+            },
+            step : function(a,b){  //可以检测我们定时器的每一次变化
+                //console.log(a);
+                //console.log(b.pos);   //运动过程中的比例值(0~1)
+                console.log(b, b.pos);
+                $(this).html(parseInt(b.pos * opts.lastNumber));
+            }
+        });
+
+    }
+
+})(jQuery);
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#count").numberRock({
+            lastNumber:12548,
+            duration:3000,
+            easing:'swing',  //慢快慢
+        });
+    });
+</script>
+
+</body>
+</html>

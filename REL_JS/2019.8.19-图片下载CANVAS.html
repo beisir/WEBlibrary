@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 1500px;">
+
+<canvas id="mycanvas" height="500" width="500">
+    <span>你的浏览器不支持canvas</span>
+</canvas>
+
+
+<!-- <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
+<button id="btn">下载</button>
+<script src="http://style.org.hc360.cn/js/build/source/core/jquery.min.js"></script>
+<script src="./2019.8.15-二维码生成插件/qrcode.min.js"></script>
+
+<script>
+/*
+    var qrcodeIMG = $("#qrcode");
+    var qrcode = new QRCode(qrcodeIMG[0], {
+        width : 100,
+        height : 100,
+        text: 'http://www.baidu.com'
+    });
+
+
+    $('#btn').on('click', function () {
+        var canvasEle = qrcodeIMG.find('canvas')
+        exportCanvasAsPNG(canvasEle[0], '下载的图片的名字.jpg');
+    });
+
+
+
+    // 设置图片分享链接
+    function exportCanvasAsPNG(canvas, fileName) {
+        var MIME_TYPE = "image/png";    // 图片类型 
+        var dlLink = document.createElement('a');   // 创建A标签
+        dlLink.download = fileName;     
+        dlLink.href = canvas.toDataURL("image/png");
+        dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.href].join(':');
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+    }
+*/
+</script> -->
+
+<script>
+window.onload=function() {
+    createcanvas();
+    drawImage();
+}
+    function createcanvas() {
+        var CANVAS=document.getElementById('mycanvas');
+        context=CANVAS.getContext('2d');
+    }
+    
+    function drawImage() {
+        var img=new Image();
+        img.onload=function() {
+            context.drawImage(img,0,0,500, 500);
+        }
+        img.src="./wj_41.jpg";
+    };
+
+
+    var mycanvas = document.getElementById('mycanvas');
+    mycanvas.onclick = function () {
+        var doA = document.createElement('a');
+
+        doA.download = '图片下载';
+        doA.href = this.toDataURL('image/png');
+        document.body.appendChild(doA);
+        doA.click();
+        document.body.removeChild(doA);
+
+        
+
+
+        console.log();    
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

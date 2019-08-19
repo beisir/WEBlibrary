@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- Target -->
+<input id="foo" value="">
+<!-- Trigger -->
+<button class="btn" data-clipboard-demo data-clipboard-target="#foo">
+    Copy to clipboard
+</button>
+
+
+<!-- Target -->
+<textarea id="bar">Mussum ipsum cacilds...</textarea>
+
+<!-- Trigger -->
+<button class="btn" data-clipboard-demo data-clipboard-action="cut" data-clipboard-target="#bar">
+    Cut to clipboard
+</button>
+
+
+
+<!-- Trigger -->
+<button class="btn" data-clipboard-demo data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+    Copy to clipboard
+</button>
+
+
+
+
+<!-- http://www.clipboardjs.cn/  复制插件  文档 -->
+<!-- <script src ="http://www.clipboardjs.cn/clipboardjs_files/clipboard.min.js"></script> -->
+<script src ="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+<script>
+
+
+// var clipboard = new ClipboardJS('.btn');
+// clipboard.on('success', function(e) {
+//     console.info('Action:', e.action);
+//     console.info('Text:', e.text);
+//     console.info('Trigger:', e.trigger);
+
+//     e.clearSelection();
+// });
+
+// clipboard.on('error', function(e) {
+//     console.error('Action:', e.action);
+//     console.error('Trigger:', e.trigger);
+// });
+
+// 例如, 你希望动态设置target, 你需要返回一个node节点.
+// new ClipboardJS('.btn', {
+//     target: function(trigger) {
+//         return trigger.nextElementSibling;
+//     }
+// });
+
+// 如果你希望动态设置text, 你需要返回字符串。
+new ClipboardJS('.btn', {
+    text: function(trigger) {
+        return trigger.getAttribute('aria-label');
+    }
+});
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
