@@ -1,0 +1,99 @@
+<!DOCTYOE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>web app</title>
+        <meta name="viewport" content="width=device-width" />
+        <style>
+            .container {
+                width: 100px;
+                height: 100px;
+                border: 1px solid #ccc;
+                background: url(./animal.png) no-repeat;
+                /* infinite : 无限循环 */
+                animation: run 3s infinite;
+                /* steps(1) 设置  表示中间没有过渡补间*/
+                animation-timing-function: steps(1)
+            }
+
+            @keyframes run {
+                0% {
+                    background-position: 0 0;
+                }
+                12.5% {
+                    background-position: -100px 0;
+                }
+                25% {
+                    background-position: -200px 0;
+                }
+                37.5% {
+                    background-position: -300px 0;
+                }
+                50% {
+                    background-position: 0 -100px;
+                }
+                62.5%{
+                    background-position: -100px -100px;
+                }
+                75%{
+                    background-position: -200px -100px;
+                }
+                87.5%{
+                    background-position: -300px -100px;
+                }
+                100%{
+                    background-position: 0 0;
+                }
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="container"></div>
+
+
+
+        <!-- <img src="https://www.hickey.cn/hebei.png" alt="图片错误"> -->
+        <!-- <table border="1">
+            <tr>
+                <td colspan="3">1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td colspan="3">7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>14</td>
+                <td>15</td>
+                <td>16</td>
+                <td>17</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                
+            </tr>
+        </table>
+
+
+
+        <input type="checkbox" id="intitbox">
+
+
+        <button>
+        <label for="intitbox">
+                helloword
+
+        </label>
+    </button> -->
+    </body>
+</html>
