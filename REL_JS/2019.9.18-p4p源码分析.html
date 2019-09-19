@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .imgbox{
+            list-style: none;
+            width: 130px;
+            height: 100px;
+            border: solid 1px #ccc;
+            position: relative;
+        }
+        /* 
+        .imgbox img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+        } */
+
+    
+    </style>
+
+    <script src="https://style.org.hc360.com/js/build/source/core/hc.common.js"></script>
+</head>
+<body>
+    <div id="learn"></div>
+<script src="https://style.org.hc360.com/js/build/source/widgets/template.js"></script>
+<script>
+
+
+var deferredDOMContentLoaded = $.Deferred();
+
+$(function () {
+    deferredDOMContentLoaded.resolve();
+});
+
+
+function p4pSourceCode (options) {
+    var _this = this,
+        date_ = {
+            n: 40,
+            m: 3,
+            type: 'p4p_smart'
+        };
+    $.extend(true, _this, {
+        listener: {},  // 监听事件队列
+        cache: null,
+        wrap: '#learn',
+        referrer: '',
+        target: '',
+        cache: '',
+        service: {
+            data: {
+                url: '//r.hc360.com/recommend',
+                data: $.extend(date_, (options._params_p4p || {})),
+                dataType: 'jsonp',
+                jsonpCallback: 'callback'
+            }
+        },
+        keyword: '',
+        antiCheating: true, // 防止作弊
+        autoSendExpoData: false,
+        precentDefaultLinkRedirect: false,  //  是否阻止默认行为
+        clickableElementSelector: 'a,button',   // 点击元素
+        getClickElementCacheIndexCallback: function (element){  // 点击时获取当前数据下标
+            return element.closest('li').index();
+        },
+        targetRenderCallback: function (targetHTML) {   // 添加渲染好的数据进入wrap
+            return $(targetHTML).appendTo(_this.wrap);
+        } 
+
+
+    }, options);
+};
+
+
+p4pSourceCode.prototype = {
+    init: function () {
+        var _this = this,
+            _deferred = _this.getDataDeferred();
+
+        if (Object.prototype.toString.call(_this.wrap) === '[object String]') {
+            _this.wrap = $(_this.wrap);
+        }
+
+        $.when(_deferred).done(function (data) {
+            _this.__dispatchEvent('dataReady', data);
+
+            _this.cache = data;
+            
+            if ((_this.cache.prolist || []).length === 0) {
+                return false;
+            };
+
+            _this.render();
+
+            _this.bindEvent();
+
+            if (_this.autoSendExpoData) {   // 是否自动发送曝光
+                deferredDOMContentLoaded.done(function () {
+                    _this.sendExpoData(_this.cache.prolist);
+                });
+            }
+
+
+        }).fail(function (err){
+            _this.__dispatchEvent('dataError', err);
+        });
+    },
+    sendExpoData: function (data) {
+        var _this = this,
+
+        _iframeName = ('p4p-expo-iframe' + Math.random()).replace(/\.*/ig, '');
+
+        if (!data.length) {
+            return false;
+        };
+
+        if (!_this.expo) {  // 在没有创建曝光元素下进入
+            var logrecordservicedomain = (location.protocol == 'https:')?'//logrecords.hc360.com':'//log.org.hc360.com';
+
+            var _html = [
+                '<div data-node-name="p4p-expo-form-wrap" style="display:none;">',
+                    '<form action="'+ logrecordservicedomain +'/logrecordservice/logrecordp4pexposure" enctype="application/x-www-form-urlencoded" method="POST" target="#ifamename#">',
+                        '<input name="p4pexpolog" type="hidden" />',
+                    '</form>',
+                    '<iframe name="#ifamename#"></iframe>',
+                '</div>'
+            ];
+            var _formWrap = $(_html.join('').replace(/\#ifamename\#/ig, _iframeName)).appendTo((_this.wrap.length > 1) ? _this.wrap.first() : _this.wrap);
+
+            $.extend(true, _this, {
+                expo: {
+                    form: _formWrap.find('form'),
+                    input: _formWrap.find('input[type="hidden"]'),
+                    iframe: _formWrap.find('iframe'),
+                    data: []
+                }
+            });
+        }
+
+        var _arr_expo_data = [],
+            _arr_expo_data_item = {};
+
+        for (var i = 0; i< data.length; i++){
+            if ($.inArray(data[i].searchResultfoId) !== -1) {
+                continue;
+            } else {
+                _this.expo.data.push(data[i].searchResultfoId);
+            };
+
+            _arr_expo_data_item.params = [
+                encodeURIComponent(_this.keyword)
+            ];
+
+            _this.__dispatchEvent('onBuildExpoData', _arr_expo_data_item, data[i]);
+
+
+            _arr_expo_data.push(_arr_expo_data_item.params.join('@@'));
+        }
+
+        _this.__dispatchEvent('onStartSendExpoData', _arr_expo_data);
+
+        if (!_arr_expo_data.length) {
+            return false;
+        }
+
+        _this.expo.input && _this.expo.input.val(_arr_expo_data.join('#&#'));
+
+        _this.expo.form.length && _this.expo.form[0].submit();
+
+    },
+    bindEvent: function () {
+        var _this = this;
+
+        _this.target && _this.target.on('click', _this.clickableElementSelector, function (event) {
+            if (_this.clickableElementSelector !== null) {
+                _this.eventHander.call(_this, event)
+            }
+        })
+
+
+    },
+    eventHander: function (event) {
+        var _this = this;
+        var _tempElement = $(event.currentTarget),
+            _tempCacheIndex = parseInt(_this.getClickElementCacheIndexCallback.call(null, _tempElement)) || 0,
+
+            _tempCacheData = _this.cache.prolist[_tempCacheIndex];  // 获取当前点击数据
+
+        if (!_tempCacheData) {
+            return false;
+        }
+
+        _this.precentDefaultLinkRedirect && event.preventDefault(); // 是否阻止默认行为
+
+        // if (_this.antiCheating && _tempCacheData.clicked) {
+
+        // }
+        _tempCacheData.clicked = true;
+
+
+        _this.__dispatchEvent('startSendClickParams', _tempCacheData);
+
+        // 发送计费请求。。。。。。。。。。。
+
+
+    },
+    render: function () {
+        var _this = this,
+            _template = {
+                template: _this.template
+            },
+            _template_params = {
+                products: _this.cache.prolist
+            };
+        
+        var _template_html = '';
+        
+        _this.__dispatchEvent('startRender', _template, _template_params);
+        
+        if ($.trim(_template) !== '') {
+
+            _template_html = template.render && template.render(_template.template)(_template_params);
+            
+            _this.target = _this.targetRenderCallback && _this.targetRenderCallback.call(_this, _template_html);
+        };
+
+        _this.__dispatchEvent('endRender', _this.target);
+
+        
+    },
+    getDataDeferred: function () {
+        var _this = this,
+            _deferred,
+            _params = {};
+        
+        _this.__dispatchEvent('getStartData', _params);
+
+        if (_this.cache) {
+            _deferred = $.Deferred();
+            _deferred.resolve(_this.cache);
+        } else {
+
+            _deferred = _this.sendHttpRequest('data', $.extend(true, {}, {
+                data: {
+                    source: _this.referrer,
+                    w: _this.keyword
+                }
+            }), _params)
+        };
+
+        return _deferred;
+
+    },
+
+    sendHttpRequest: function (service, _params){
+        var _this = this;
+        return $.ajax($.extend(true, {}, (_this.service[service] || {}), (_params || {})));
+    },
+
+    resizeImage: function (imageEntityList, imageWrapEntityGetter) {
+        var calculateImageSize = function ($img, $imgWidth, $imgHeight, $wrapWidth, $wrapHeight) {
+            var w, h ,wn, hn, ha, va, hdif, vdif, 
+                $imgCW = $wrapWidth,
+                $imgCH = $wrapHeight;
+            // 设置图片自定义属性 宽高为图片原始大小
+            if ($img.data('owidth') === undefined) {$img.data('owidth', $imgWidth)};
+            if ($img.data('oheight') === undefined) {$img.data('oheight', $imgWidth)};
+
+            if (($imgCW / $imgCH) < ($img.data('owidth') / $img.data('oheight'))) {
+                w = '100%';
+                h = 'auto';
+                wn = Math.floor($imgCW);
+                hn = Math.floor($imgCW * ($img.data('oheight') / $img.data('owidth')));
+            } else {
+                w = 'auto';
+                h = '100%';
+                wn = Math.floor($imgCH * ($img.data('owidth') / $img.data('oheight')));
+                hn = Math.floor($imgCH);
+            };
+
+            ha = 'center';
+            hdif = $imgCW - wn;
+            if (ha === 'left'){margL = 0};
+            if (ha === 'center'){margL = hdif * 0.5};
+            if (ha === 'right'){margL = hdif};
+            if (ha.indexOf('%')!==-1){
+                ha = parseInt(ha.replace('%', ''), 10);
+                if (ha > 0){margL = hdif * ha * 0.01};
+            }
+
+            va = 'center';
+            vdif = $imgCH - hn;
+            if (va === 'top'){margT = 0};
+            if (va === 'center'){margT = vdif * 0.5};
+            if (va === 'bottom'){margT = vdif};
+            if (va.indexOf('%')!==-1){
+                va = parseInt(va.replace('%', ''), 10);
+                if (va > 0){margT = vdif * va * 0.01};
+            }
+
+            w = wn;
+            h = hn;
+            $img.css({
+                'width': w,
+                'height': h,
+                'margin-left': Math.floor(margL),
+                'margin-top': Math.floor(margT),
+            })    
+
+        };
+
+        $.each(imageEntityList, function (index, imageEntity) {
+            var src = imageEntity.src || '';
+
+            if (src) {
+                var imageTemp = new Image();
+                imageTemp.onload = function () {
+                    var imageWrapEntity = $(imageEntity).parent();
+                    if (imageWrapEntityGetter) {
+                        // 基于当前图片父级计算
+                        imageWrapEntity = imageWrapEntityGetter.call(imageEntity);
+                    };
+
+                    calculateImageSize(
+                        $(imageEntity), // jq当前图片元素
+                        this.width,     // js 当前图片宽度
+                        this.height,    // js 当前图片高度
+                        imageWrapEntity.width(),    // jq当前元素父级宽度
+                        imageWrapEntity.height()    // jq当前元素父级高度
+                    );
+
+                    imageTemp = null;
+                }
+                imageTemp.src = src;
+
+            }
+
+
+        });
+    },
+
+    
+    __getEventListener: function (eventType) {
+        var _this = this;
+        _this.listener[eventType] = _this.listener[eventType] ? _this.listener[eventType] : [];
+        
+        return _this.listener[eventType];
+    },
+
+    __dispatchEvent: function () {
+        var _this = this,
+            _eventType = Array.prototype.shift.call(arguments), 
+            _listener = _this.__getEventListener(_eventType);
+        for (var i = 0; i < _listener.length; i++) {
+            try {
+                _listener[i].apply(_this, arguments);
+            } catch (ex){}
+        };
+    },
+
+    addEventListener: function (eventType, eventHander) {
+        var _this = this,
+            _listener = [],
+            _eventType = eventType.split(',');
+        for (var i = 0; i < _eventType.length; i ++ ){
+            var _listener = _this.__getEventListener(_eventType[i]);
+            _listener.push(eventHander);
+        }
+
+    }
+
+}
+var p4pbase = new p4pSourceCode({
+    keyword: '挖掘机',
+    template: [
+        '{{each products as product i}}',
+            '<ul>',
+            '<li data-index="{{i}}">',
+                '<a href="{{product.searchResultfoMiUrl}}">',
+                    '<h3>{{product.searchResultfoTitle}}</h3>',
+                    '<img src="{{product.searchResultfoImageBig}}" />',
+                '</a>',
+            '</li>',
+            '</ul>',
+        '{{/each}}'
+    ].join('')
+});
+
+p4pbase.addEventListener('getStartData', function (_params) {
+    // console.log(_params)
+});
+
+p4pbase.addEventListener('dataReady', function (data) {
+    data.prolist = data.searchResultInfo;
+});
+
+p4pbase.addEventListener('startRender', function (_template, _template_params) {
+    _template.template = ['{{each products as product i}}',
+        '<li data-index="{{i}}">',
+            '<div class="imgbox"><img src="{{product.searchResultfoImageBig}}" /></div>',
+            '<h2>{{product.titlename}}</h2>',
+            '<button>{{product.searchResultfoCompany}}</button>',
+        '</li>',
+    '{{/each}}'].join('');
+    $.each(_template_params.products, function (index, item) {
+        item.titlename = "hebei" + index;
+    });
+});
+
+p4pbase.addEventListener('endRender', function (targetElement) {
+    targetElement.on('click', function () {
+        alert($(this).index() + '<--------->666666');
+    });
+
+    this.resizeImage(targetElement.find('img'));
+
+
+
+
+});
+
+p4pbase.addEventListener('startSendClickParams', function (_tempCacheData) {
+    console.log(_tempCacheData);
+});
+
+p4pbase.init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>    
+
+
+
+
+
+</body>
+</html>
