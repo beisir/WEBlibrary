@@ -356,7 +356,6 @@ p4pSourceCode.prototype = {
         
         return _this.listener[eventType];
     },
-
     __dispatchEvent: function () {
         var _this = this,
             _eventType = Array.prototype.shift.call(arguments), 
@@ -367,7 +366,6 @@ p4pSourceCode.prototype = {
             } catch (ex){}
         };
     },
-
     addEventListener: function (eventType, eventHander) {
         var _this = this,
             _listener = [],
