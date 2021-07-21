@@ -20,14 +20,14 @@
 <textarea id="bar">Mussum ipsum cacilds...</textarea>
 
 <!-- Trigger -->
-<button class="btn" data-clipboard-demo data-clipboard-action="cut" data-clipboard-target="#bar">
+<!-- <button class="btn" data-clipboard-demo data-clipboard-action="cut" data-clipboard-target="#bar">
     Cut to clipboard
-</button>
+</button> -->
 
 
-
+<input type="hidden" id="clipText" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
 <!-- Trigger -->
-<button class="btn" data-clipboard-demo data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+<button class="btn" id="button" data-clipboard-demo >
     Copy to clipboard
 </button>
 
@@ -63,13 +63,16 @@
 // });
 
 // 如果你希望动态设置text, 你需要返回字符串。
-new ClipboardJS('.btn', {
-    text: function(trigger) {
-        return trigger.getAttribute('aria-label');
-    }
-});
+// new ClipboardJS('#button', {
+//     text: function(trigger) {
+//         console.log(trigger);
+//         return clipText.getAttribute('data-clipboard-text');
+//     }
+// });
+document.querySelector('#button').addEventListener('click', function (){
+    window.copy("奥斯卡接电话卡萨汇顶科技阿斯加德哈萨克的哈桑立刻打开撒")
 
-
+})
 
 </script>
 
